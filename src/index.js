@@ -16,7 +16,7 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery('YEET_PROJECT', postProject);
     yield takeEvery('GET_PROJECT', getProject);
-//     yield takeEvery('REMOVE', deleteProject);
+    yield takeEvery('REMOVE', removeProject);
 }
 
 // Create sagaMiddleware
@@ -43,7 +43,16 @@ const projects = (state = [], action) => {
             return state;
     }
 }
+function* removeProject(action) {
+    console.log(action.payload)
+    try {
+        yield axios.delete(`api/portfolio/${action.payload}`)
 
+        yield put({ type: 'GET_PROJECT' })
+    } catch (error) {
+        console.log('DELETE ', error)
+    }
+}
 // Used to store the project tags (e.g. 'React', 'jQuery', 'Angular', 'Node.js')
 const tags = (state = [], action) => {
     switch (action.type) {

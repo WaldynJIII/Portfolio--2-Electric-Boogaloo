@@ -55,7 +55,7 @@ class Portfolio extends Component {
                                         <Typography component="p">
                                             <Router>
                                                 <Button>
-                                                    Github<Link to={project.github} target="_blank" onClick={(event) => { event.preventDefault(); window.open(this.makeHref(project.github)); }} />
+                                                    {project.github}<a  target={project.github}   />
                                                 </Button>
                                             </Router>
                                         </Typography>

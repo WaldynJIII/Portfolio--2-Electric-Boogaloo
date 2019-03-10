@@ -4,11 +4,6 @@ import { connect } from 'react-redux';
 
 
 
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
-import CardContent from '@material-ui/core/CardContent';
-
 
 class AdminForm extends Component {
     state = {
@@ -36,7 +31,9 @@ handleChangeFor=(key)=>(event)=>{
     }
     })
 }
-
+removeFromList=(event)=>{
+this.props.dispatch({type: 'REMOVE', payload: event.target.value})
+}
 
     render() {
         console.log(this.state.formData)
@@ -133,7 +130,7 @@ handleChangeFor=(key)=>(event)=>{
                         {this.props.reduxStore.projects.map((project, i) => {
                             return (
                                 <tr>
-                                    <td>{project.id} {project.name}</td><td>{project.date_completed}</td><td>{project.tag_id}</td><button value={project.id} onClick={this.removeFromList}>Remove From List</button><td></td>
+                                    <td value={project.id}>{project.id} {project.title}</td><td>{project.date_completed}</td><td>{project.name}</td><button value={project.id} onClick={this.removeFromList}>Remove From List</button><td></td>
                                 </tr>
 
                             )
