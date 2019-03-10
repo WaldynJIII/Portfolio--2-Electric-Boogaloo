@@ -34,9 +34,11 @@ function* postProject(action) {
 }
 // Used to store projects returned from the server
 const projects = (state = [], action) => {
+    console.log(state)
     switch (action.type) {
         case 'SET_PROJECTS':
             return action.payload;
+            
         default:
             return state;
     }
@@ -57,7 +59,7 @@ function* getProject(action) {
             type: 'GET',
             url: '/api/portfolio'
         })
-        yield put({ type: 'SET_PROJECT', payload: projectData.data })
+        yield put({ type: 'SET_PROJECTS', payload: projectData.data })
     }
     catch (err) {
         console.log('in plantplant (get)', err)
