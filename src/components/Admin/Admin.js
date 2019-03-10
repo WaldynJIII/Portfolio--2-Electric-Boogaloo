@@ -12,45 +12,109 @@ import CardContent from '@material-ui/core/CardContent';
 
 class AdminForm extends Component {
     state = {
-        formDatat: {
+        formData: {
             title: '',
             description: '',
             thumbnail: '',
             github: '',
             website: '',
-            date: '',
-
+            date_completed: '',
+            tag_id: '',
         }
     }
+    yeetProject = () => {
+        const action = { type: 'YEET_PROJECT', payload: this.state.projectToAdd }
+        this.props.dispatch(action);
+    }
 
-
-handleChangeFor()
+handleChangeFor=(key)=>(event)=>{
+    this.setState({
+        ...this.state,
+        formData: {...this.state.formData,
+        [key]: event.target.value,
+    }
+    })
+}
 
 
     render() {
+        console.log(this.state.formData)
         return (
             <div>
                 <form onSubmit={this.addCustomer}>
-                    <input onChange={this.changeThumbnail} type="text" placeholder="thumbnail" />
-                    <input onChange={this.changeName} type="text" placeholder="title" />
-                    <input onChange={this.changeWebsite} type="text" placeholder="website" />
-                    <input onChange={this.changeGithub} type="text" placeholder="github" />
-                    <input onChange={this.changeDate_completed} type="date" placeholder="date" /> <br />
-                    <input onChange={this.changeDescription} type="text" placeholder="Description" /> <br></br>
+                    <input onChange={this.handleChangeFor('thumbnail')} type="text" placeholder="thumbnail" />
+                    <input onChange={this.handleChangeFor('title')} type="text" placeholder="title" />
+                    <input onChange={this.handleChangeFor('website')} type="text" placeholder="website" />
+                    <input onChange={this.handleChangeFor('github')} type="text" placeholder="github" />
+                    <input onChange={this.handleChangeFor('date_completed')} type="date" placeholder="date" /> <br />
+                    <input onChange={this.handleChangeFor('description')} type="text" placeholder="Description" /> <br></br>
 
 
 
+<div>
+                    <label>
+                        <input
+                            type="radio"
+                            value='1'
+                            name="React"
+                        />
+                        React
+                </label>
+                        </div>
+                <div>
+                    <label>
+                        <input
+                            type="radio"
+                            value='2'
+                            name="jQuery"
+                        />
+                        jQuery
+                </label>
+                </div>
+                <div>
+                    <label>
+                        <input
+                            type="radio"
+                            value='3'
+                            name="Node"
+                        />
+                        Node
+                </label>
+                </div>
+                <div>
+                    <label>
+                        <input
+                            type="radio"
+                            value='4'
+                            name="SQL"
+                        />
+                        SQL
+                </label>
+                </div>
+                <div>
+                    <label>
+                        <input
+                            type="radio"
+                            value='5'
+                            name="Redux"
+                        />
+                        Redux
+                </label>
+                </div>
+                    <div>
+                        <label>
+                            <input
+                                type="radio"
+                                value='6'
+                                name="HTML"
+                            />
+                            HTML
+                </label>
+                    </div>
 
-                    <select onClick={this.tagChange} className="category">
-                        <option />
-                        <option onClick={this.tagChange} value="1">React</option>
-                        <option value="2">jQuery</option>
-                        <option value="3">SQL</option>
-                        <option value="4">HTML</option>
-                        <option value="5">ReduX</option>
-                        <option value="6">Node</option>
+            
 
-                    </select>
+               
 
 
 
