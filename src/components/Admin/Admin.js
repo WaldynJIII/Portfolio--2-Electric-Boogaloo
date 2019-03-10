@@ -22,9 +22,10 @@ class AdminForm extends Component {
             tag_id: '',
         }
     }
-    yeetProject = () => {
-        const action = { type: 'YEET_PROJECT', payload: this.state.projectToAdd }
-        this.props.dispatch(action);
+    yeetProject = (event) => {
+        event.preventDefault()
+       
+            this.props.dispatch({ type: 'YEET_PROJECT', payload: this.state.formData });
     }
 
 handleChangeFor=(key)=>(event)=>{
@@ -41,7 +42,7 @@ handleChangeFor=(key)=>(event)=>{
         console.log(this.state.formData)
         return (
             <div>
-                <form onSubmit={this.addCustomer}>
+                <form onSubmit={this.yeetProject}>
                     <input onChange={this.handleChangeFor('thumbnail')} type="text" placeholder="thumbnail" />
                     <input onChange={this.handleChangeFor('title')} type="text" placeholder="title" />
                     <input onChange={this.handleChangeFor('website')} type="text" placeholder="website" />
@@ -51,7 +52,8 @@ handleChangeFor=(key)=>(event)=>{
 
 
 
-<div>
+                    <div onChange={this.handleChangeFor('tag_id')}>
+                    <div>
                     <label>
                         <input
                             type="radio"
@@ -111,6 +113,7 @@ handleChangeFor=(key)=>(event)=>{
                             HTML
                 </label>
                     </div>
+                    </div>
 
             
 
@@ -121,7 +124,7 @@ handleChangeFor=(key)=>(event)=>{
 
 
 
-                    <input onClick={this.yeetProject} type="submit" value="Next" />
+                    <input  type="submit" value="Next" />
 
                 </form>
                 <table className="admin-table">

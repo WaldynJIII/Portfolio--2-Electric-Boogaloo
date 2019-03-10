@@ -10,14 +10,28 @@ import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
 
+import { takeEvery, put } from 'redux-saga/effects'
+import axios from 'axios';
 // Create the rootSaga generator function
 function* rootSaga() {
-
+    yield takeEvery('YEET_PROJECT', postProject);
+    yield takeEvery('GET_PROJECT', getProject);
+//     yield takeEvery('REMOVE', deleteProject);
 }
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
+function* postProject(action) {
 
+    try {
+        yield axios.post('/api/portfolio', action.payload);
+        const nextAction = { type: 'GET_PLANT' };
+        yield put(nextAction);
+    } catch (error) {
+        console.log('Error making POST request');
+        alert('there was a problem');
+    }
+}
 // Used to store projects returned from the server
 const projects = (state = [], action) => {
     switch (action.type) {
@@ -35,6 +49,18 @@ const tags = (state = [], action) => {
             return action.payload;
         default:
             return state;
+    }
+}
+function* getProject(action) {
+    try {
+        const projectData = yield axios({
+            type: 'GET',
+            url: '/api/portfolio'
+        })
+        yield put({ type: 'SET_PROJECT', payload: projectData.data })
+    }
+    catch (err) {
+        console.log('in plantplant (get)', err)
     }
 }
 

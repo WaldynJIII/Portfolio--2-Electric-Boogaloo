@@ -20,4 +20,21 @@ router.get('/', (req, res) => {
         });
 
 });
+router.post('/', (req, res) => {
+
+    console.log(req.body)
+    let proj = req.body
+    const queryText = `INSERT INTO "projects" ( "title", "description", "thumbnail", "website", "github", "date_completed", "tag_id")
+                       VALUES ($1, $2, $3, $4, $5, $6, $7)`
+    pool.query(queryText, [proj.title, proj.description, proj.thumbnail, proj.website, proj.github, proj.date_completed, proj.tag_id])
+        .then((result) => {
+
+            res.sendStatus(201)
+
+        })
+        .catch((error) => {
+            console.log(`Error on query ${error}`);
+            res.sendStatus(500);
+        });
+});
 module.exports = router;
