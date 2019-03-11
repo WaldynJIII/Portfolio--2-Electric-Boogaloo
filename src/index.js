@@ -25,7 +25,7 @@ function* postProject(action) {
 
     try {
         yield axios.post('/api/portfolio', action.payload);
-        const nextAction = { type: 'GET_PLANT' };
+        const nextAction = { type: 'GET_PROJECT' };
         yield put(nextAction);
     } catch (error) {
         console.log('Error making POST request');
@@ -47,11 +47,13 @@ function* removeProject(action) {
     console.log(action.payload)
     try {
         yield axios.delete(`api/portfolio/${action.payload}`)
-
+alert('It worked')
         yield put({ type: 'GET_PROJECT' })
     } catch (error) {
         console.log('DELETE ', error)
+        alert('it didnt')
     }
+
 }
 // Used to store the project tags (e.g. 'React', 'jQuery', 'Angular', 'Node.js')
 const tags = (state = [], action) => {
