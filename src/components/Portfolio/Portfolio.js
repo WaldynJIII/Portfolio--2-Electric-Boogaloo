@@ -9,7 +9,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-
+import ProjectList from './ProjectList'
 import { connect } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
@@ -29,7 +29,7 @@ class Portfolio extends Component {
             <div>
                            
                         <Grid item md={3}>
-                        {this.props.reduxStore.projects.map((project) => ( <PortfolioList project={project} key={project.id} />)
+                        {this.props.reduxStore.projects.map((project) => ( <ProjectList project={project} key={project.id} />)
                          
                         
                  
